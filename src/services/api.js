@@ -1,12 +1,10 @@
-// src/services/api.js
-
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://api.dhan.co',
+    baseURL: process.env.API_URL,
     headers: {
         'Content-Type': 'application/json',
-        'access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI0MzE3OTYzLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwMDIwODU0OSJ9.xD7Lxe6jJLJx5Ej4ZWejdUPo-0mVz9b1hVjIPZ_WbYpdikIEN0oEExb2RZCg7Tx86OG06EqWA_ef-MEusPTXRQ',
+        'access-token': process.env.ACCESS_TOKEN,
     },
 });
 
@@ -38,6 +36,28 @@ export const fetchFundLimit = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching fund limit:', error);
+        throw error;
+    }
+};
+
+export const sendPostbackData = async (data) => {
+    try {
+        const response = await fetch('/.netlify/functions/postback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error sending postback data:', error);
         throw error;
     }
 };
