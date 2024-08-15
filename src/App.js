@@ -7,6 +7,7 @@ import MarketData from './pages/MarketData';
 import Ledger from './pages/Ledger';
 import TradeHistory from './pages/TradeHistory';
 import PLAnalyzer from './pages/PLAnalyzer';
+import Options from './pages/Options';
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
           <Link to="/trade-history">Trade History</Link>
           <Link to="/pl-analyzer">Profit & Loss</Link>
           <Link to="/ledger">Ledger</Link>
+          <Link to="/Options">Options</Link>
+
         </nav>
       </header>
       <Layout>
@@ -31,6 +34,7 @@ const App = () => {
             <Route path="/trade-history" element={<TradeHistory />} />
             <Route path="/pl-analyzer" element={<PLAnalyzer />} />
             <Route path="/ledger" element={<Ledger />} />
+            <Route path="/options" element={<Options />} />
           </Routes>
         </main>
       </Layout>
