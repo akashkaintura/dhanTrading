@@ -19,9 +19,9 @@ export const fetchLedgerInfo = async () => {
     }
 };
 
-export const fetchTradeHistory = async (fromDate, toDate, pageNumber) => {
+export const fetchTradeHistory = async (from_Date, to_Date, page_number = 0) => {
     try {
-        const response = await api.get(`/tradeHistory/${fromDate}/${toDate}/${pageNumber}`);
+        const response = await api.get(`/tradeHistory/${from_Date}/${to_Date}/${page_number}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching trade history:', error);
