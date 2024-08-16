@@ -65,8 +65,17 @@ const TradeHistory = () => {
         setError(null);
     };
 
-    const handleNextPage = () => setPageNumber((prev) => prev + 1);
-    const handlePrevPage = () => pageNumber > 1 && setPageNumber((prev) => prev - 1);
+    const handleNextPage = () => {
+        setPageNumber((prev) => prev + 1);
+        getTradeHistory();
+    };
+
+    const handlePrevPage = () => {
+        if (pageNumber > 1) {
+            setPageNumber((prev) => prev - 1);
+            getTradeHistory();
+        }
+    };
 
     return (
         <div>

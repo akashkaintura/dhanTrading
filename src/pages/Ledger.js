@@ -10,7 +10,11 @@ const Ledger = () => {
         const getLedgerInfo = async () => {
             try {
                 const data = await fetchLedgerInfo();
-                setLedgerData(data);
+                if (data.length === 0) {
+                    setError('No ledger information available.');
+                } else {
+                    setLedgerData(data);
+                }
             } catch (err) {
                 setError('Failed to fetch ledger information.');
             } finally {
@@ -29,10 +33,6 @@ const Ledger = () => {
         return <div>Error: {error}</div>;
     }
 
-    if (ledgerData.length === 0) {
-        return <div>No ledger information available.</div>;
-    }
-
     return (
         <div>
             <h2>Ledger Information</h2>
@@ -46,6 +46,5 @@ const Ledger = () => {
         </div>
     );
 };
-
 
 export default Ledger;
